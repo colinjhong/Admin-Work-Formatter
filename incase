@@ -1,0 +1,45 @@
+Sub FormatRoster()
+'
+' FormatRoster Macro
+'
+
+'
+    Columns("A:A").Select
+    Application.CutCopyMode = False
+    Selection.Delete Shift:=xlToLeft
+    Columns("B:S").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("K:O").Select
+    Selection.Delete Shift:=xlToLeft
+    Columns("J:J").Select
+    Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    Range("J2").Select
+    ActiveCell.FormulaR1C1 = "=(RC[-2]&"", ""&RC[-1])"
+    Set SourceRange = Sheet1.Range("J2")
+    Set fillRange = Sheet1.Range("J2", Sheet1.Range("I2").End(xlDown).Offset(0, 1))
+    SourceRange.AutoFill Destination:=fillRange
+    Columns("J:J").Select
+    Selection.Copy
+    Columns("K:K").Select
+    Selection.PasteSpecial Paste:=xlValues, Operation:=xlNone, SkipBlanks:= _
+        False, Transpose:=False
+    Range("H2").End(xlDown).Select
+    Sheet1.Range("H2", ActiveSheet.Range("H2").End(xlDown)).Select
+    Application.CutCopyMode = False
+    Selection.Delete Shift:=xlToLeft
+    Sheet1.Range("H2", ActiveSheet.Range("H2").End(xlDown)).Select
+    Application.CutCopyMode = False
+    Selection.Delete Shift:=xlToLeft
+    Sheet1.Range("H2", ActiveSheet.Range("H2").End(xlDown)).Select
+    Application.CutCopyMode = False
+    Selection.Delete Shift:=xlToLeft
+    Range("I1").Select
+    Selection.Delete Shift:=xlToLeft
+    Range("I1:J1").Select
+    Selection.Delete Shift:=xlToLeft
+    Rows("1:1").Select
+    Selection.Delete Shift:=xlUp
+End Sub
+
+
